@@ -1,7 +1,7 @@
 <% if @events.empty? %>
   <p>There are no events to display</p>
 <% else %>
-  <p>There are <%= @events.size %> events to display.</p>
+  <%= will_paginate @events %>
   <table cellspacing="5" border>
     <% for event in @events %>
       <tr>

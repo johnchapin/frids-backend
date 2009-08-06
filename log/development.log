@@ -21693,3 +21693,318 @@ Processing EventsController#show (for 127.0.0.1 at 2009-08-06 00:13:26) [GET]
   [4;36;1mLine Load (0.4ms)[0m   [0;1mSELECT * FROM "lines" WHERE ("lines"."event_id" = 2) [0m
 Rendering events/show
 Completed in 15ms (View: 5, DB: 1) | 200 OK [http://localhost/events/2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:22:31) [GET]
+  [4;35;1mSQL (1.6ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `paginate' for #<Class:0x23d5548>):
+  app/controllers/lines_controller.rb:4:in `index'
+
+Rendered rescues/_trace (27.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-08-06 00:23:11) [GET]
+
+MissingSourceFile (no such file to load -- WillPaginate):
+  app/controllers/lines_controller.rb:1
+
+Rendered rescues/_trace (95.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-08-06 00:23:12) [GET]
+
+MissingSourceFile (no such file to load -- WillPaginate):
+  app/controllers/lines_controller.rb:1
+
+Rendered rescues/_trace (27.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:25:13) [GET]
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `paginate' for #<Class:0x24ce4b8>):
+  app/controllers/lines_controller.rb:4:in `index'
+
+Rendered rescues/_trace (28.4ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:25:17) [GET]
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `paginate' for #<Class:0x2407084>):
+  app/controllers/lines_controller.rb:4:in `index'
+
+Rendered rescues/_trace (92.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:26:24) [GET]
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `paginate' for #<Class:0x25f0954>):
+  app/controllers/lines_controller.rb:4:in `index'
+
+Rendered rescues/_trace (27.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:26:25) [GET]
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `paginate' for #<Class:0x24effa0>):
+  app/controllers/lines_controller.rb:4:in `index'
+
+Rendered rescues/_trace (27.4ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:26:25) [GET]
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `paginate' for #<Class:0x2422dfc>):
+  app/controllers/lines_controller.rb:4:in `index'
+
+Rendered rescues/_trace (92.1ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:26:30) [GET]
+  [4;36;1mLine Load (6.6ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 37ms (View: 21, DB: 7) | 200 OK [http://localhost/lines]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:29) [GET]
+  [4;36;1mLine Load (6.3ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 33ms (View: 18, DB: 6) | 200 OK [http://localhost/lines]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:32) [GET]
+  Parameters: {"page"=>"2"}
+  [4;36;1mLine Load (6.2ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 15, DB: 6) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:33) [GET]
+  Parameters: {"page"=>"3"}
+  [4;36;1mLine Load (5.1ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 60[0m
+Rendering lines/index
+Completed in 24ms (View: 14, DB: 5) | 200 OK [http://localhost/lines?page=3]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:37) [GET]
+  Parameters: {"page"=>"2"}
+  [4;35;1mLine Load (6.6ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 15, DB: 7) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:38) [GET]
+  Parameters: {"page"=>"1"}
+  [4;35;1mLine Load (6.5ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 16, DB: 7) | 200 OK [http://localhost/lines?page=1]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:39) [GET]
+  Parameters: {"page"=>"2"}
+  [4;35;1mLine Load (67.0ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 92ms (View: 16, DB: 67) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:41) [GET]
+  Parameters: {"page"=>"3"}
+  [4;35;1mLine Load (5.2ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 60[0m
+Rendering lines/index
+Completed in 25ms (View: 14, DB: 5) | 200 OK [http://localhost/lines?page=3]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:44) [GET]
+  Parameters: {"page"=>"2"}
+  [4;36;1mLine Load (6.6ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 15, DB: 7) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:45) [GET]
+  Parameters: {"page"=>"1"}
+  [4;36;1mLine Load (6.2ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 15, DB: 6) | 200 OK [http://localhost/lines?page=1]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:45) [GET]
+  Parameters: {"page"=>"3"}
+  [4;36;1mLine Load (5.2ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 60[0m
+Rendering lines/index
+Completed in 24ms (View: 14, DB: 5) | 200 OK [http://localhost/lines?page=3]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:46) [GET]
+  Parameters: {"page"=>"2"}
+  [4;35;1mLine Load (6.4ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 33ms (View: 17, DB: 7) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:47) [GET]
+  Parameters: {"page"=>"1"}
+  [4;35;1mLine Load (6.6ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 15, DB: 7) | 200 OK [http://localhost/lines?page=1]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:49) [GET]
+  Parameters: {"page"=>"2"}
+  [4;35;1mLine Load (6.3ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 16, DB: 6) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:51) [GET]
+  Parameters: {"page"=>"3"}
+  [4;35;1mLine Load (4.9ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 60[0m
+Rendering lines/index
+Completed in 24ms (View: 14, DB: 5) | 200 OK [http://localhost/lines?page=3]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:53) [GET]
+  Parameters: {"page"=>"2"}
+  [4;36;1mLine Load (6.6ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 31ms (View: 16, DB: 7) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:53) [GET]
+  Parameters: {"page"=>"1"}
+  [4;36;1mLine Load (6.3ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 31ms (View: 16, DB: 7) | 200 OK [http://localhost/lines?page=1]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:55) [GET]
+  Parameters: {"page"=>"2"}
+  [4;36;1mLine Load (6.4ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 16, DB: 7) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:55) [GET]
+  Parameters: {"page"=>"3"}
+  [4;36;1mLine Load (5.1ms)[0m   [0;1mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 60[0m
+Rendering lines/index
+Completed in 24ms (View: 14, DB: 5) | 200 OK [http://localhost/lines?page=3]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:56) [GET]
+  Parameters: {"page"=>"2"}
+  [4;35;1mLine Load (6.2ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 30[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 32ms (View: 16, DB: 6) | 200 OK [http://localhost/lines?page=2]
+
+
+Processing LinesController#index (for 127.0.0.1 at 2009-08-06 00:27:57) [GET]
+  Parameters: {"page"=>"1"}
+  [4;35;1mLine Load (6.3ms)[0m   [0mSELECT * FROM "lines" ORDER BY line_date DESC, call_received DESC LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "lines" [0m
+Rendering lines/index
+Completed in 30ms (View: 16, DB: 6) | 200 OK [http://localhost/lines?page=1]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2009-08-06 00:29:00) [GET]
+  [4;35;1mEvent Load (2.3ms)[0m   [0mSELECT * FROM "events" ORDER BY event_date DESC, event_time DESC LIMIT 30 OFFSET 0[0m
+  [4;36;1mLine Load (8.4ms)[0m   [0;1mSELECT "lines".* FROM "lines" WHERE ("lines".event_id IN (1,2,3,4,5,6,7,8,37,9,10,11,12,13,14,15,16,17,18,38,19,20,21,22,23,24,39,40,41,25)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "events" [0m
+Rendering events/index
+Completed in 64ms (View: 21, DB: 11) | 200 OK [http://localhost/events]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2009-08-06 00:29:25) [GET]
+  [4;36;1mEvent Load (2.2ms)[0m   [0;1mSELECT * FROM "events" ORDER BY event_date DESC, event_time DESC LIMIT 30 OFFSET 0[0m
+  [4;35;1mLine Load (8.6ms)[0m   [0mSELECT "lines".* FROM "lines" WHERE ("lines".event_id IN (1,2,3,4,5,6,7,8,37,9,10,11,12,13,14,15,16,17,18,38,19,20,21,22,23,24,39,40,41,25)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "events" [0m
+Rendering events/index
+Completed in 117ms (View: 20, DB: 11) | 200 OK [http://localhost/events]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2009-08-06 00:29:28) [GET]
+  Parameters: {"page"=>"2"}
+  [4;35;1mEvent Load (1.3ms)[0m   [0mSELECT * FROM "events" ORDER BY event_date DESC, event_time DESC LIMIT 30 OFFSET 30[0m
+  [4;36;1mLine Load (4.8ms)[0m   [0;1mSELECT "lines".* FROM "lines" WHERE ("lines".event_id IN (26,27,28,29,30,31,42,32,33,34,43,35,36)) [0m
+Rendering events/index
+Completed in 31ms (View: 8, DB: 6) | 200 OK [http://localhost/events?page=2]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2009-08-06 00:29:30) [GET]
+  Parameters: {"page"=>"1"}
+  [4;35;1mEvent Load (2.3ms)[0m   [0mSELECT * FROM "events" ORDER BY event_date DESC, event_time DESC LIMIT 30 OFFSET 0[0m
+  [4;36;1mLine Load (8.3ms)[0m   [0;1mSELECT "lines".* FROM "lines" WHERE ("lines".event_id IN (1,2,3,4,5,6,7,8,37,9,10,11,12,13,14,15,16,17,18,38,19,20,21,22,23,24,39,40,41,25)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "events" [0m
+Rendering events/index
+Completed in 49ms (View: 17, DB: 11) | 200 OK [http://localhost/events?page=1]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2009-08-06 00:29:33) [GET]
+  Parameters: {"page"=>"2"}
+  [4;36;1mEvent Load (1.3ms)[0m   [0;1mSELECT * FROM "events" ORDER BY event_date DESC, event_time DESC LIMIT 30 OFFSET 30[0m
+  [4;35;1mLine Load (4.8ms)[0m   [0mSELECT "lines".* FROM "lines" WHERE ("lines".event_id IN (26,27,28,29,30,31,42,32,33,34,43,35,36)) [0m
+Rendering events/index
+Completed in 30ms (View: 8, DB: 6) | 200 OK [http://localhost/events?page=2]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2009-08-06 00:29:34) [GET]
+  Parameters: {"page"=>"1"}
+  [4;36;1mEvent Load (2.3ms)[0m   [0;1mSELECT * FROM "events" ORDER BY event_date DESC, event_time DESC LIMIT 30 OFFSET 0[0m
+  [4;35;1mLine Load (8.3ms)[0m   [0mSELECT "lines".* FROM "lines" WHERE ("lines".event_id IN (1,2,3,4,5,6,7,8,37,9,10,11,12,13,14,15,16,17,18,38,19,20,21,22,23,24,39,40,41,25)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "events" [0m
+Rendering events/index
+Completed in 48ms (View: 17, DB: 11) | 200 OK [http://localhost/events?page=1]

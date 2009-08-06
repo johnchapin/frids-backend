@@ -1,6 +1,15 @@
 class LinesController < ApplicationController
 
   def index
+    @lines = Line.paginate(:page => params[:page], :order => "line_date DESC, call_received DESC")
+    respond_to do |format|
+      format.html
+      format.xml { render :xml=>@lines }
+      format.json { render :json=>@lines }
+    end
+  end
+
+  def all
     @lines = Line.find(:all, :order => "line_date DESC, call_received DESC")
     respond_to do |format|
       format.html
