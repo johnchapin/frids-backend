@@ -1,0 +1,3 @@
+class FidsLine < Line
+
+end

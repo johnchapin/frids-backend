@@ -1,0 +1,20 @@
+<% if (@line.nil?) %>
+  <p>Could not retrieve line.</p>
+<% else %>
+  <h3>Incident Line</h3>
+  <table cellpadding="2" border>
+    <tr>
+      <td><%= link_to ( @line.event_id, {
+              :controller => "events",
+              :action => "show",
+              :id => @line.event_id })
+            %></td>
+      <td><%= @line.line_date %></td>
+      <td><%= @line.call_received.strftime("%H:%M:%S") %></td>
+      <td><%= @line.incident_number %></td>
+      <td><%= @line.unit %></td>
+      <td><%= @line.call_type %></td>
+      <td><%= @line.location %></td>
+    </tr>
+  </table>
+<% end %>

@@ -1,0 +1,22 @@
+<% if @events.empty? %>
+  <p>There are no events to display</p>
+<% else %>
+  <p>There are <%= @events.size %> events to display.</p>
+  <table cellspacing="5" border>
+    <% for event in @events %>
+      <tr>
+        <td>
+          <%= link_to( event.id, {
+                       :controller => "events",
+                       :action => "show",
+                       :id => event.id}) -%>
+
+        </td>
+        <td><%= event.event_date %></td>
+        <td><%= event.event_time.strftime("%H:%M:%S") %></td>
+        <td><%= event.location %></td>
+        <td><%= (event.lines.collect { |line| line.unit }).join(", ") %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

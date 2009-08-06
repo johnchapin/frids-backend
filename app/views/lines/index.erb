@@ -1,0 +1,17 @@
+<% if (@lines.empty?) %>
+  <p>There are no lines.</p>
+<% else %>
+  <p>There are <%= @lines.size %> lines to display</p>
+  <table cellspacing="5" border>
+    <% for line in @lines %>
+      <tr>
+        <td><%= line.line_date %></td>
+        <td><%= line.call_received.strftime("%H:%M:%S") %></td>
+        <td><%= line.incident_number %></td>
+        <td><%= line.unit %></td>
+        <td><%= line.call_type %></td>
+        <td><%= line.location %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
