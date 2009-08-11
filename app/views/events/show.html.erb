@@ -4,13 +4,12 @@
   <h3>Event</h3>
   <table cellpadding="2" border>
     <tr><td>ID</td><td><%= @event.id %></td></tr>
-    <tr><td>Date</td><td><%= @event.event_date %></td></tr>
-    <tr><td>Time</td><td><%= @event.event_time.strftime("%H:%M:%S") %></td></tr>
-    <tr><td>Location</td><td><%= @event.location %></td></tr>
+    <tr><td>Date</td><td><%= @event.event_datetime %></td></tr>
+    <tr><td>Location</td><td><%= @event.address %></td></tr>
   </table>
   <h3>Incidents</h3>
   <table cellpadding="2" border>
-    <% for line in @lines %>
+    <% for line in @event.lines %>
       <tr>
         <td><%= link_to ( "#{line.line_type.upcase}/#{line.id}",  {
               :controller => "lines",
@@ -19,10 +18,11 @@
             %></td>
         <td><%= line.line_date %></td>
         <td><%= line.call_received.strftime("%H:%M:%S") %></td>
+        <td><%= line.call_received %></td>
         <td><%= line.incident_number %></td>
         <td><%= line.unit %></td>
         <td><%= line.call_type %></td>
-        <td><%= line.location %></td>
+        <td><%= line.address %></td>
       </tr>
     <% end %>
   </table>

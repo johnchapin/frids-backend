@@ -1,22 +1,25 @@
+<html>
+<head>
+  <%= GMap.header %>
+  <%= @map.to_html %>
+</head>
+<title></title>
+<body>
 <% if @events.empty? %>
   <p>There are no events to display</p>
 <% else %>
+  <h3>Map</h3>
+  <%= @map.div(:width => 600, :height => 400) %>
   <%= will_paginate @events %>
-  <table cellspacing="5" border>
+  <p>
     <% for event in @events %>
-      <tr>
-        <td>
-          <%= link_to( event.id, {
-                       :controller => "events",
-                       :action => "show",
-                       :id => event.id}) -%>
-
-        </td>
-        <td><%= event.event_date %></td>
-        <td><%= event.event_time.strftime("%H:%M:%S") %></td>
-        <td><%= event.location %></td>
-        <td><%= (event.lines.collect { |line| line.unit }).join(", ") %>
-      </tr>
+      <% @event_text = time_ago_in_words(event.event_datetime).capitalize+" ago, unit"+(event.lines.size > 1 ? "s" : "")+" "+comma_and(event.lines.collect{|l|l.unit})+" responded to an incident at "+event.location.clean_address.titleize+"." %>
+       <%= link_to( @event_text , {
+                    :controller => "events",
+                    :action => "show",
+                    :id => event.id}) -%><br/>
     <% end %>
-  </table>
+   </p>
 <% end %>
+</body>
+</html>

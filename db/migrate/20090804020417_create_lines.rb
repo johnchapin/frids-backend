@@ -5,17 +5,17 @@ class CreateLines < ActiveRecord::Migration
       t.date      :line_date,        :null => false
       t.integer   :incident_number,  :null => false
       t.string    :unit,             :null => false
-      t.string    :location,         :null => false
+      t.string    :address,          :null => false
       t.string    :tax_map
       t.string    :call_type,        :null => false
-      t.time      :call_received,    :null => false
-      t.time      :call_dispatch
-      t.time      :unit_enroute
-      t.time      :staged_near_scene
-      t.time      :arrived_on_scene
-      t.time      :left_scene
-      t.time      :arrived_hosp
-      t.time      :in_service
+      t.datetime  :call_received,    :null => false
+      t.datetime  :call_dispatch
+      t.datetime  :unit_enroute
+      t.datetime  :staged_near_scene
+      t.datetime  :arrived_on_scene
+      t.datetime  :left_scene
+      t.datetime  :arrived_hosp
+      t.datetime  :in_service
       t.string    :url
       t.integer   :event_id
       t.timestamps

@@ -6,11 +6,11 @@
     <% for line in @lines %>
       <tr>
         <td><%= line.line_date %></td>
-        <td><%= line.call_received.strftime("%H:%M:%S") %></td>
+        <td><%= line.call_received.strftime("%m/%d/%Y %H:%M:%S") %></td>
         <td><%= line.incident_number %></td>
         <td><%= line.unit %></td>
         <td><%= line.call_type %></td>
-        <td><%= line.location %></td>
+        <td><%= line.address %></td>
       </tr>
     <% end %>
   </table>

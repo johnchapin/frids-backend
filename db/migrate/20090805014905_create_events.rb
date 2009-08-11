@@ -1,19 +1,17 @@
 class CreateEvents < ActiveRecord::Migration
   def self.up
     create_table :events do |t|
-      t.date    :event_date, :null => false
-      t.time    :event_time, :null => false
-      t.string  :location, :null => false
+      t.datetime    :event_datetime, :null => false
+      t.string  :address, :null => false
       t.string  :tax_map
-      t.decimal :latitude
-      t.decimal :longitude
+      t.integer :location_id
     end
 
-    add_index :events, [:event_date, :event_time, :location], :unique => true
+    add_index :events, [:event_datetime, :address], :unique => true
   end
 
   def self.down
-    remove_index :events, [:event_date, :event_time, :location]
+    remove_index :events, [:event_datetime, :address]
     drop_table :events
   end
 end
