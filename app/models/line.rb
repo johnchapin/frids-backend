@@ -1,9 +1,11 @@
 class Line < ActiveRecord::Base
-  before_save :process_event
+  before_create :process_event
   has_one :event
 
   private
+
     def process_event
+
       self.call_received = Time.utc(self.line_date.year,
                                      self.line_date.month,
                                      self.line_date.day,
@@ -26,7 +28,6 @@ class Line < ActiveRecord::Base
           )
       end
       self.event_id = @event.id
-
     end
 
 end

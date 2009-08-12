@@ -7,7 +7,6 @@ class Event < ActiveRecord::Base
   private
     def process_location
       @key = LocationsHelper.createKey(self.address)
-      logger.info("KEY: #{@key}")
       @location = Location.find_by_key(@key)
       if (@location.nil?)
         @location = Location.create(:key => @key, :tax_map => self.tax_map)

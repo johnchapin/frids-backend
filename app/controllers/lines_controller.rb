@@ -2,7 +2,6 @@ class LinesController < ApplicationController
 
   def index
     @lines = Line.paginate(:page => params[:page], :order => "line_date DESC, call_received DESC")
-    @lines.each { |line| logger.info "JSC: #{line.call_received.to_s}\n" }
     respond_to do |format|
       format.html
       format.xml { render :xml=>@lines }
