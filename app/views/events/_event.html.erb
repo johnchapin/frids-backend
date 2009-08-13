@@ -1,0 +1,10 @@
+<tr>
+  <td>
+    <%= link_to ( event.event_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+              {
+                :controller => "events",
+                :action => "show",
+                :id => event.id }) %>
+  </td>
+  <td><%= event.lines.collect{|line| line.unit}.join(", ") %></td>
+</tr>

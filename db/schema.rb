@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090810193656) do
+ActiveRecord::Schema.define(:version => 20090813032304) do
 
   create_table "events", :force => true do |t|
     t.datetime "event_datetime", :null => false
@@ -63,5 +63,14 @@ ActiveRecord::Schema.define(:version => 20090810193656) do
   add_index "locations", ["latitude"], :name => "index_locations_on_latitude"
   add_index "locations", ["longitude"], :name => "index_locations_on_longitude"
   add_index "locations", ["tax_map"], :name => "index_locations_on_tax_map"
+
+  create_table "tax_maps", :force => true do |t|
+    t.string "tax_map_number", :null => false
+    t.string "city"
+    t.string "zip_code"
+    t.string "state_abbr"
+  end
+
+  add_index "tax_maps", ["tax_map_number"], :name => "index_tax_maps_on_tax_map_number", :unique => true
 
 end
