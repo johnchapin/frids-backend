@@ -1,3 +1,0 @@
-class RidsLine < Line
-
-end

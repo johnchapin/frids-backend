@@ -1,3 +1,0 @@
-class FidsLine < Line
-
-end
