@@ -1,0 +1,20 @@
+<% bgcolor_val = location_counter.modulo(2).nonzero? ? "#cccccc" : "#9c9c9c" %>
+<tr bgcolor="<%= bgcolor_val %>">
+  <td valign="top" rowspan="4">
+    <%= link_to ( location.dirty_address,
+              {
+                :controller => "locations",
+                :action => "show",
+                :id => location.id }) %><br/>
+  </td>
+  <th>Status:</th><td><%= location.status %></td>
+</tr>
+<tr bgcolor="<%= bgcolor_val %>">
+  <th>Tax Map:</th><td><%= location.tax_map.tax_map_number %></td>
+</tr>
+<tr bgcolor="<%= bgcolor_val %>">
+  <th>Clean Address:</th><td><%= location.clean_address.titleize %></td>
+</tr>
+<tr bgcolor="<%= bgcolor_val %>">
+  <th>Lat/Lon</th><td><%= location.latitude.truncate(4) %> <%= location.longitude.truncate(4) %></td>
+</tr>

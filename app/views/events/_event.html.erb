@@ -7,7 +7,7 @@
                 :action => "show",
                 :id => event.id }) %>
   </td>
-  <td>Address:</td><td><%= event.location.clean_address %></td>
+  <td>Address:</td><td><%= event.location.clean_address %> (<%= event.location.status %>)</td>
 </tr>
 <tr bgcolor="<%= bgcolor_val %>">
   <td>Call Type:</td><td><%= event.lines.collect{|line| line.call_type}.uniq.join("<br/>") %></td>

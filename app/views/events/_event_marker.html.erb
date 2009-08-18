@@ -1,0 +1,24 @@
+<table>
+<tr>
+  <th>Datetime:</th>
+  <td>
+    <%= link_to ( event_marker.event_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+              {
+                :controller => "events",
+                :action => "show",
+                :id => event_marker.id }) %>
+  </td>
+</tr>
+<tr>
+  <th>Address:</th>
+  <td><%= event_marker.location.clean_address.titleize %><br/>(<%= event_marker.location.status %>)</td>
+</tr>
+<tr>
+  <th>Call Type:</th>
+  <td><%= event_marker.lines.collect{|line| line.call_type}.uniq.join("<br/>") %></td>
+</tr>
+<tr>
+  <th>Units:</th>
+  <td><%= event_marker.lines.collect{|line| line.unit}.join(", ") %></td>
+</tr>
+</table>

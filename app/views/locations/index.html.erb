@@ -1,0 +1,8 @@
+<% if (@locations.empty?) %>
+  <p>There are no locations.</p>
+<% else %>
+  <%= will_paginate @locations %>
+  <table>
+    <%= render :partial => "location", :collection => @locations %>
+  </table>
+<% end %>

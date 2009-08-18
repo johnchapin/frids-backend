@@ -1,0 +1,23 @@
+<% if (@tax_maps.empty?) %>
+  <p>There are no tax maps.</p>
+<% else %>
+  <%= will_paginate @tax_maps %>
+  <table cellspacing="5" border>
+    <% for tax_map in @tax_maps %>
+      <tr>
+        <td><%= tax_map.tax_map_number %></td>
+        <td><%= tax_map.city %></td>
+        <td><%= tax_map.zip_code %></td>
+        <td><%= tax_map.state_abbr %></td>
+        <td><%= tax_map.nw_lat %></td>
+        <td><%= tax_map.nw_lon %></td>
+        <td><%= tax_map.ne_lat %></td>
+        <td><%= tax_map.ne_lon %></td>
+        <td><%= tax_map.se_lat %></td>
+        <td><%= tax_map.se_lon %></td>
+        <td><%= tax_map.sw_lat %></td>
+        <td><%= tax_map.sw_lon %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
