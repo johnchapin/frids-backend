@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'hpricot'
+require 'geonames'
+
+doc = Hpricot.XML(open(ARGV[0]))
+
+print "tax_map_number, city, zip_code, state_abbr, nw_lat, nw_lon, ne_lat, ne_lon, se_lat, se_lon, sw_lat, sw_lon, center_lat, center_lon, min_lat, max_lat, min_lon, max_lon\n"
+print "000, Charlottesville, , VA, , , , , , , , , , , , , ,\n"
+
+(doc/:Placemark/:Polygon/:coordinates).each_with_index do |grid,index|
+  coordinates = grid.inner_html.to_s.split(" ")
+  if (coordinates.size == 5)
+    # We don't care about elevation
+    nw_lon,nw_lat,elevation = coordinates[0].split(",")
+    ne_lon,ne_lat,elevation = coordinates[1].split(",")
+    se_lon,se_lat,elevation = coordinates[2].split(",")
+    sw_lon,sw_lat,elevation = coordinates[3].split(",")
+    # Calculate a center point
+    center_lat = ((nw_lat.to_f - se_lat.to_f)/2) + se_lat.to_f
+    center_lon = ((nw_lon.to_f - se_lon.to_f)/2) + se_lon.to_f
+    min_lat = [sw_lat, se_lat].min
+    max_lat = [nw_lat, ne_lat].max
+    min_lon = [nw_lon, sw_lon].min
+    max_lon = [se_lon, ne_lon].max
+    
+    #print "Geocoding: #{center_lat},#{center_lon}\n"
+    #results = Geocoding::get("#{center_lat},#{center_lon}")
+    places = Geonames::WebService.find_nearby_place_name center_lat, center_lon
+    zip_code = ""
+    printf "%03d, #{places[0].name}, #{zip_code}, VA, #{nw_lat}, #{nw_lon}, #{ne_lat}, #{ne_lon}, #{se_lat}, #{se_lon}, #{sw_lat}, #{sw_lon}, #{center_lat}, #{center_lon}, #{min_lat}, #{max_lat}, #{min_lon}, #{max_lon}\n", index + 1
+    sleep(0.25)
+  end
+end
