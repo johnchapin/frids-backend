@@ -2,6 +2,7 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.paginate( 
+      :conditions => ['status != ""'],
       :page => params[:page],
       :order => "updated_at DESC")
     respond_to do |format|
