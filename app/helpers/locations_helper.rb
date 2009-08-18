@@ -8,8 +8,9 @@ module LocationsHelper
                         Regexp.compile("\\(.*\\)") ]
   @@space_regex = Regexp.compile("[\\s]+")
 
-  def self.createKey(in_string)
-    in_string.gsub(@@key_regex,"").upcase
+  def self.createKey(in_address, in_tax_map)
+    in_tax_map ||= ""
+    (in_address + in_tax_map).gsub(@@key_regex,"").upcase
   end
 
   def self.cleanAddress(in_address)

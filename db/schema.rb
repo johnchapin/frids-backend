@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(:version => 20090813032304) do
     t.string   "address",        :null => false
     t.string   "tax_map"
     t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "events", ["event_datetime", "address"], :name => "index_events_on_event_datetime_and_address", :unique => true
@@ -47,11 +49,13 @@ ActiveRecord::Schema.define(:version => 20090813032304) do
 
   create_table "locations", :force => true do |t|
     t.string   "key",                                          :null => false
+    t.string   "status"
+    t.string   "dirty_address"
     t.string   "clean_address"
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
-    t.string   "tax_map"
+    t.integer  "tax_map_id"
     t.decimal  "latitude",      :precision => 10, :scale => 7
     t.decimal  "longitude",     :precision => 10, :scale => 7
     t.datetime "created_at"
@@ -59,16 +63,32 @@ ActiveRecord::Schema.define(:version => 20090813032304) do
   end
 
   add_index "locations", ["clean_address"], :name => "index_locations_on_clean_address"
+  add_index "locations", ["dirty_address"], :name => "index_locations_on_dirty_address"
   add_index "locations", ["key"], :name => "index_locations_on_key", :unique => true
   add_index "locations", ["latitude"], :name => "index_locations_on_latitude"
   add_index "locations", ["longitude"], :name => "index_locations_on_longitude"
-  add_index "locations", ["tax_map"], :name => "index_locations_on_tax_map"
 
   create_table "tax_maps", :force => true do |t|
-    t.string "tax_map_number", :null => false
-    t.string "city"
-    t.string "zip_code"
-    t.string "state_abbr"
+    t.string   "tax_map_number",                                :null => false
+    t.string   "city"
+    t.string   "zip_code"
+    t.string   "state_abbr"
+    t.decimal  "nw_lat",         :precision => 7, :scale => 10
+    t.decimal  "nw_lon",         :precision => 7, :scale => 10
+    t.decimal  "ne_lat",         :precision => 7, :scale => 10
+    t.decimal  "ne_lon",         :precision => 7, :scale => 10
+    t.decimal  "se_lat",         :precision => 7, :scale => 10
+    t.decimal  "se_lon",         :precision => 7, :scale => 10
+    t.decimal  "sw_lat",         :precision => 7, :scale => 10
+    t.decimal  "sw_lon",         :precision => 7, :scale => 10
+    t.decimal  "center_lat",     :precision => 7, :scale => 10
+    t.decimal  "center_lon",     :precision => 7, :scale => 10
+    t.decimal  "min_lat",        :precision => 7, :scale => 10
+    t.decimal  "max_lat",        :precision => 7, :scale => 10
+    t.decimal  "min_lon",        :precision => 7, :scale => 10
+    t.decimal  "max_lon",        :precision => 7, :scale => 10
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "tax_maps", ["tax_map_number"], :name => "index_tax_maps_on_tax_map_number", :unique => true

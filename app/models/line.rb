@@ -6,7 +6,7 @@ class Line < ActiveRecord::Base
 
     def process_event
 
-      self.call_received = Time.utc(self.line_date.year,
+      self.call_received = Time.local(self.line_date.year,
                                      self.line_date.month,
                                      self.line_date.day,
                                      self.call_received.hour,

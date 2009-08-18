@@ -1,10 +1,17 @@
-<tr>
-  <td>
+<% bgcolor_val = event_counter.modulo(2).nonzero? ? "#cccccc" : "#9c9c9c" %>
+<tr bgcolor="<%= bgcolor_val %>">
+  <td valign="top" rowspan="3">
     <%= link_to ( event.event_datetime.strftime("%Y-%m-%d %H:%M:%S"),
               {
                 :controller => "events",
                 :action => "show",
                 :id => event.id }) %>
   </td>
-  <td><%= event.lines.collect{|line| line.unit}.join(", ") %></td>
+  <td>Address:</td><td><%= event.location.clean_address %></td>
+</tr>
+<tr bgcolor="<%= bgcolor_val %>">
+  <td>Call Type:</td><td><%= event.lines.collect{|line| line.call_type}.uniq.join("<br/>") %></td>
+</tr>
+<tr bgcolor="<%= bgcolor_val %>">
+  <td>Units:</td><td colspan="2"><%= event.lines.collect{|line| line.unit}.join(", ") %></td>
 </tr>

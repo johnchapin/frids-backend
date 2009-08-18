@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string  :address, :null => false
       t.string  :tax_map
       t.integer :location_id
+      t.timestamps
     end
 
     add_index :events, [:event_datetime, :address], :unique => true
