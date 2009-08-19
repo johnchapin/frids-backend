@@ -25,7 +25,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql
+  database: frids_production
+  username: frids_production
+  password: 
+  host: mysql.boostrot.net
   pool: 5
   timeout: 5000

@@ -12,8 +12,8 @@
 ActiveRecord::Schema.define(:version => 20090813032304) do
 
   create_table "events", :force => true do |t|
-    t.datetime "event_datetime", :null => false
-    t.string   "address",        :null => false
+    t.datetime "event_datetime",                 :null => false
+    t.string   "address",        :default => "", :null => false
     t.string   "tax_map"
     t.integer  "location_id"
     t.datetime "created_at"
@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(:version => 20090813032304) do
   add_index "events", ["event_datetime", "address"], :name => "index_events_on_event_datetime_and_address", :unique => true
 
   create_table "lines", :force => true do |t|
-    t.string   "line_type",         :null => false
-    t.date     "line_date",         :null => false
-    t.integer  "incident_number",   :null => false
-    t.string   "unit",              :null => false
-    t.string   "address",           :null => false
+    t.string   "line_type",         :default => "", :null => false
+    t.date     "line_date",                         :null => false
+    t.integer  "incident_number",   :default => 0,  :null => false
+    t.string   "unit",              :default => "", :null => false
+    t.string   "address",           :default => "", :null => false
     t.string   "tax_map"
-    t.string   "call_type",         :null => false
-    t.datetime "call_received",     :null => false
+    t.string   "call_type",         :default => "", :null => false
+    t.datetime "call_received",                     :null => false
     t.datetime "call_dispatch"
     t.datetime "unit_enroute"
     t.datetime "staged_near_scene"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20090813032304) do
   add_index "lines", ["line_date", "incident_number", "unit"], :name => "index_lines_on_line_date_and_incident_number_and_unit", :unique => true
 
   create_table "locations", :force => true do |t|
-    t.string   "key",                                          :null => false
+    t.string   "key",                                          :default => "", :null => false
     t.string   "status"
     t.string   "dirty_address"
     t.string   "clean_address"
@@ -69,24 +69,24 @@ ActiveRecord::Schema.define(:version => 20090813032304) do
   add_index "locations", ["longitude"], :name => "index_locations_on_longitude"
 
   create_table "tax_maps", :force => true do |t|
-    t.string   "tax_map_number",                                :null => false
+    t.string   "tax_map_number",                                 :default => "", :null => false
     t.string   "city"
     t.string   "zip_code"
     t.string   "state_abbr"
-    t.decimal  "nw_lat",         :precision => 7, :scale => 10
-    t.decimal  "nw_lon",         :precision => 7, :scale => 10
-    t.decimal  "ne_lat",         :precision => 7, :scale => 10
-    t.decimal  "ne_lon",         :precision => 7, :scale => 10
-    t.decimal  "se_lat",         :precision => 7, :scale => 10
-    t.decimal  "se_lon",         :precision => 7, :scale => 10
-    t.decimal  "sw_lat",         :precision => 7, :scale => 10
-    t.decimal  "sw_lon",         :precision => 7, :scale => 10
-    t.decimal  "center_lat",     :precision => 7, :scale => 10
-    t.decimal  "center_lon",     :precision => 7, :scale => 10
-    t.decimal  "min_lat",        :precision => 7, :scale => 10
-    t.decimal  "max_lat",        :precision => 7, :scale => 10
-    t.decimal  "min_lon",        :precision => 7, :scale => 10
-    t.decimal  "max_lon",        :precision => 7, :scale => 10
+    t.decimal  "nw_lat",         :precision => 14, :scale => 10
+    t.decimal  "nw_lon",         :precision => 14, :scale => 10
+    t.decimal  "ne_lat",         :precision => 14, :scale => 10
+    t.decimal  "ne_lon",         :precision => 14, :scale => 10
+    t.decimal  "se_lat",         :precision => 14, :scale => 10
+    t.decimal  "se_lon",         :precision => 14, :scale => 10
+    t.decimal  "sw_lat",         :precision => 14, :scale => 10
+    t.decimal  "sw_lon",         :precision => 14, :scale => 10
+    t.decimal  "center_lat",     :precision => 14, :scale => 10
+    t.decimal  "center_lon",     :precision => 14, :scale => 10
+    t.decimal  "min_lat",        :precision => 14, :scale => 10
+    t.decimal  "max_lat",        :precision => 14, :scale => 10
+    t.decimal  "min_lon",        :precision => 14, :scale => 10
+    t.decimal  "max_lon",        :precision => 14, :scale => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end

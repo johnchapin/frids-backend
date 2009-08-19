@@ -6,7 +6,7 @@
 <title></title>
 <body>
 <% if @events.empty? %>
-  <p>There are no events to display</p>
+  <p>There are no @events to display</p>
 <% else %>
   <%= @map.div(:width => 600, :height => 400) %>
   <%= will_paginate @events %>
