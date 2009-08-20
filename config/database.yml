@@ -27,8 +27,8 @@ test:
 production:
   adapter: mysql
   database: frids_production
-  username: frids_production
+  user: frids_production
   password: 
-  host: mysql.boostrot.net
+  host: localhost
   pool: 5
   timeout: 5000
