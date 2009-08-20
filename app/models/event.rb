@@ -14,6 +14,7 @@ class Event < ActiveRecord::Base
       if (@location.nil?)
         @tax_map = TaxMap.find_by_tax_map_number(self.tax_map)
         @location = Location.create(:key => @key, :tax_map => @tax_map, :dirty_address => self.address)
+        Delayed::Job.enqueue @location
       end
       self.location_id = @location.id
     end
