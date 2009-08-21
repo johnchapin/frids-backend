@@ -1,0 +1,53 @@
+#map_div {
+  width: 600px;
+  height: 350px;
+  border: 1px solid black;
+}
+
+#events_div {
+  width: 600px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.events_table {
+  font-size: 11px;
+  width: 600px;
+}
+
+thead {
+  background-color: #444;
+  color: #fff;
+}
+
+.event_1 {
+  background-color: #fff;
+}
+
+.event_2 {
+  background-color: #ddd;
+}
+
+.response {
+  font-size: 18px;
+  text-align: center;
+  width: 30px;
+}
+
+.datetime {
+  text-align: center;
+  width: 50px;
+}
+
+.units {
+  text-align: center;
+  width: 130px;
+}
+
+.event_link {
+  text-align: center;
+  width: 15px;
+}
+
+.details {
+}

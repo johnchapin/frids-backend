@@ -2,17 +2,27 @@
 <head>
   <%= GMap.header(:host => request.host) %>
   <%= @map.to_html %>
+<link rel="stylesheet" type="text/css" href="/css/events.css"/>
 </head>
 <title></title>
 <body>
 <% if @events.empty? %>
   <p>There are no events to display</p>
 <% else %>
-  <%= @map.div(:width => 600, :height => 400) %>
-  <%= will_paginate @events %>
-  <table>
-    <%= render :partial => "event", :collection => @events %>
-  </table>
+  <%= @map.div %>
+  <div id="events_div">
+    <%= will_paginate @events %>
+    <table class="events_table">
+      <thead class="events_header">
+        <th></th>
+        <th>Date</th>
+        <th>Response</th>
+        <th>Details</th>
+        <th>Units</th>
+      </thead>
+      <%= render :partial => "event", :collection => @events %>
+    </table>
+  </div>
 <% end %>
 </body>
 </html>

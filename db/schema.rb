@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090820015305) do
+ActiveRecord::Schema.define(:version => 20090821052932) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20090820015305) do
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "response_time"
   end
 
   add_index "events", ["event_datetime", "address"], :name => "index_events_on_event_datetime_and_address", :unique => true

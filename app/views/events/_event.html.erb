@@ -1,17 +1,24 @@
-<% bgcolor_val = event_counter.modulo(2).nonzero? ? "#cccccc" : "#9c9c9c" %>
-<tr bgcolor="<%= bgcolor_val %>">
-  <td valign="top" rowspan="3">
-    <%= link_to ( event.event_datetime.strftime("%Y-%m-%d %H:%M:%S"),
-              {
-                :controller => "events",
-                :action => "show",
-                :id => event.id }) %>
+<% event_class = "event_" + (event_counter.modulo(2).nonzero? ? "1" : "2") %>
+
+<tr class="<%= event_class %>">
+  <td class="event_link">
+    <%= link_to( ">",
+          :controller => "events",
+          :action => "show",
+          :id => event.id) %> 
   </td>
-  <td>Address:</td><td><%= event.location.clean_address.titleize %> (<%= event.location.status %>)</td>
-</tr>
-<tr bgcolor="<%= bgcolor_val %>">
-  <td>Call Type:</td><td><%= event.lines.collect{|line| line.call_type + "..."}.uniq.join("<br/>") %></td>
-</tr>
-<tr bgcolor="<%= bgcolor_val %>">
-  <td>Units:</td><td colspan="2"><%= event.lines.collect{|line| line.unit}.join(", ") %></td>
+  <td class="datetime">
+    <%= event.event_datetime.strftime("%m/%d") %><br/>
+    <%= event.event_datetime.strftime("%H:%M") %>
+  </td>
+  <td class="response">
+    <%= event.response_time.nil? ? "" : event.response_time / 60 %>
+  </td>
+  <td class="details">
+    <%= event.lines.collect{|line|line.call_type+"..."}.uniq.join(", ") %><br/>
+    <%= event.location.clean_address.titleize %>
+  </td>
+  <td class="units">
+    <%= event.lines.collect{|line|line.unit}.uniq.join(", ") %>
+  </td>
 </tr>
