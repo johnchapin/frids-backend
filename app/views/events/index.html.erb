@@ -1,6 +1,6 @@
 <html>
 <head>
-  <%= GMap.header %>
+  <%= GMap.header(:host => request.host) %>
   <%= @map.to_html %>
 </head>
 <title></title>

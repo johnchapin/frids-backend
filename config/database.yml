@@ -27,7 +27,7 @@ test:
 production:
   adapter: mysql
   database: frids_production
-  user: frids_production
+  username: frids_production
   password: 
   host: localhost
   pool: 5
