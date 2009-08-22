@@ -23,9 +23,9 @@ class Location < ActiveRecord::Base
       (self.tax_map.city ? ", #{self.tax_map.city}" : "") +
       (self.tax_map.state_abbr ? ", #{self.tax_map.state_abbr}" : "") +
       (self.tax_map.zip_code ? " #{self.tax_map.zip_code}" : "")
-    logger.info("JSC: self.clean_address = #{self.clean_address}\n")
     self.status = ""
-    results = Geocoding::get(self.clean_address)
+    logger.info "Attempting to geocode: #{self.clean_address}"
+    results = Geocoding::get(self.clean_address, :key => "ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ" )
     if results.status == Geocoding::GEO_SUCCESS
       self.latitude,self.longitude = results[0].latlon
       self.status = "INVALID"
