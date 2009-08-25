@@ -18,8 +18,8 @@ class FidsParser < FridsParser
 		    call_received "/td[7]/font"
   		  call_dispatch "/td[8]/font"
 	  	  unit_enroute "/td[9]/font"
-		    arrived_on_scene "/td[11]/font"
-		    in_service "/td[14]/font"
+		    arrived_on_scene "/td[10]/font"
+		    in_service "/td[11]/font"
 		    url "/td[3]/font/b/a/@href"
 	    end.ensure_presence_of_pattern('incident_number')
     end
