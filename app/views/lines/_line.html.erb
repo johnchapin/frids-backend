@@ -1,0 +1,26 @@
+<% line_class = "line_" + (line_counter.modulo(2).nonzero? ? "1" : "2") %>
+
+<tr class="<%= line_class %>">
+  <td class="line_link">
+    <%= link_to( ">",
+          :controller => "lines",
+          :action => "show",
+          :id => line.id) %> 
+  </td>
+  <td class="datetime">
+    <%= line.call_received.nil? ? "" : line.call_received.strftime("%m/%d/%y") + "<br/>" + line.call_received.strftime("%H:%M") %>
+  </td>
+  <td class="datetime">
+    <%= line.arrived_on_scene.nil? ? "" : line.arrived_on_scene.strftime("%m/%d/%y") + "<br/>" + line.arrived_on_scene.strftime("%H:%M") %>
+  </td>
+  <td class="line_type">
+    <%= line.line_type.capitalize %>
+  </td>
+  <td class="details">
+    <%= line.call_type+"..." %><br/>
+    <%= line.address %>
+  </td>
+  <td class="units">
+    <%= line.unit %>
+  </td>
+</tr>

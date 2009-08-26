@@ -8,22 +8,17 @@
     <tr><td>Location</td><td><%= @event.address %></td></tr>
   </table>
   <h3>Incidents</h3>
-  <table cellpadding="2" border>
-    <% for line in @event.lines %>
-      <tr>
-        <td><%= link_to ( "#{line.line_type.upcase}/#{line.id}",  {
-              :controller => "lines",
-              :action => "show",
-              :id => line.id })
-            %></td>
-        <td><%= line.line_date %></td>
-        <td><%= line.call_received.strftime("%H:%M:%S") %></td>
-        <td><%= line.call_received %></td>
-        <td><%= line.incident_number %></td>
-        <td><%= line.unit %></td>
-        <td><%= line.call_type %></td>
-        <td><%= line.address %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div id="lines_div">
+    <table class="lines_table">
+      <thead class="lines_header">
+        <th></th>
+        <th>Call Time</th>
+        <th>Arrival Time</th>
+        <th>Type</th>
+        <th>Details</th>
+        <th>Unit</th>
+      </thead>
+      <%= render :partial => "line", :collection => @lines %>
+    </table>
+  </div>
 <% end %>

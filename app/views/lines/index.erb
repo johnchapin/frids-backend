@@ -1,17 +1,26 @@
-<% if (@lines.empty?) %>
-  <p>There are no lines.</p>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/css/lines.css"/>
+</head>
+<title></title>
+<body>
+<% if @lines.empty? %>
+  <p>There are no lines to display</p>
 <% else %>
-  <%= will_paginate @lines %>
-  <table cellspacing="5" border>
-    <% for line in @lines %>
-      <tr>
-        <td><%= line.line_date %></td>
-        <td><%= line.call_received.strftime("%m/%d/%Y %H:%M:%S") %></td>
-        <td><%= line.incident_number %></td>
-        <td><%= line.unit %></td>
-        <td><%= line.call_type %></td>
-        <td><%= line.address %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div id="lines_div">
+    <%= will_paginate @lines %>
+    <table class="lines_table">
+      <thead class="lines_header">
+        <th></th>
+        <th>Call Time</th>
+        <th>Arrival Time</th>
+        <th>Type</th>
+        <th>Details</th>
+        <th>Unit</th>
+      </thead>
+      <%= render :partial => "line", :collection => @lines %>
+    </table>
+  </div>
 <% end %>
+</body>
+</html>

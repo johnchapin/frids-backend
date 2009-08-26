@@ -1,6 +1,6 @@
 <% bgcolor_val = location_counter.modulo(2).nonzero? ? "#cccccc" : "#9c9c9c" %>
 <tr bgcolor="<%= bgcolor_val %>">
-  <td valign="top" rowspan="4">
+  <td valign="top" rowspan="5">
     <%= link_to ( location.dirty_address,
               {
                 :controller => "locations",
@@ -10,11 +10,14 @@
   <th>Status:</th><td><%= location.status %></td>
 </tr>
 <tr bgcolor="<%= bgcolor_val %>">
-  <th>Tax Map:</th><td><%= location.tax_map.tax_map_number %></td>
+  <th>Tax Map:</th><td><%= location.tax_map.nil? ? "" : location.tax_map.tax_map_number %></td>
 </tr>
 <tr bgcolor="<%= bgcolor_val %>">
-  <th>Clean Address:</th><td><%= location.clean_address.titleize %></td>
+  <th>Tax Map Center:</th><td><%= location.tax_map.center_lat.nil? ? "" : location.tax_map.center_lat %> <%= location.tax_map.center_lon.nil? ? "" : location.tax_map.center_lon %></td>
 </tr>
 <tr bgcolor="<%= bgcolor_val %>">
-  <th>Lat/Lon</th><td><%= location.latitude.truncate(4) %> <%= location.longitude.truncate(4) %></td>
+  <th>Clean Address:</th><td><%= location.clean_address.nil? ? "" : location.clean_address.titleize %></td>
+</tr>
+<tr bgcolor="<%= bgcolor_val %>">
+  <th>Lat/Lon</th><td><%= location.latitude.nil? ? "" : location.latitude.truncate(4) %> <%= location.longitude.nil? ? "" : location.longitude.truncate(4) %></td>
 </tr>
