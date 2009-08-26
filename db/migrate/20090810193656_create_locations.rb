@@ -8,7 +8,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string    :city
       t.string    :state
       t.string    :zip_code
-      t.integer   :tax_map_id
+      t.string    :tax_map_val
       t.decimal   :latitude, :precision => 10, :scale => 7
       t.decimal   :longitude, :precision => 10, :scale => 7
       t.timestamps
