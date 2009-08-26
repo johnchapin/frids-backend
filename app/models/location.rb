@@ -1,8 +1,8 @@
 class Location < ActiveRecord::Base
 
   CHARLOTTESVILLE_LATLON = [38.037764,-78.48926]
-  THROTTLE_THRESHOLD = 60
-  INITIAL_DELAY = 0.5
+  THROTTLE_THRESHOLD = 256
+  INITIAL_DELAY = 2
   DELAY_STEP = 2
 
   has_many :events
@@ -34,8 +34,8 @@ class Location < ActiveRecord::Base
     logger.info "Attempting to geocode: #{self.clean_address}"
     delay = INITIAL_DELAY
     while (pending)
-      # results = Geocoding::get(self.clean_address, :key => "ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ" )
-      results = Geocoding::get(self.clean_address)
+      results = Geocoding::get(self.clean_address, :key => "ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ" )
+      # results = Geocoding::get(self.clean_address)
       if results.status == Geocoding::GEO_SUCCESS
         pending = false
         self.latitude,self.longitude = results[0].latlon
@@ -57,8 +57,8 @@ class Location < ActiveRecord::Base
             end
           end
         end
-      elsif result.status == Geocoding::GEO_TOO_MANY_QUERIES
-        delay += DELAY_STEP
+      elsif results.status == Geocoding::GEO_TOO_MANY_QUERIES
+        delay *= delay
         if (delay > THROTTLE_THRESHOLD) 
           pending = false
           logger.error "Geocoding throttled past #{THROTTLE_THRESHOLD} seconds"
