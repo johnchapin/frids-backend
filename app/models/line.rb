@@ -12,14 +12,19 @@ class Line < ActiveRecord::Base
                                   :incident_number => options[:incident_number],
                                   :unit => options[:unit]})
     if line.nil?
+      options.delete(:arrived_on_scene)
       line = Line.new(options)
       line.call_received = add_date_to_time(line.line_date, line.call_received)
     else
       # This is the only reason for an update, at this point
       line.arrived_on_scene = options[:arrived_on_scene]
+      logger.info "JSC: Attempting to update event response time!"
       event = Event.find_by_id(line.event_id)
       if (!event.nil?) 
+        logger.info "JSC: event id = #{event.id}"
       	line.update_event_response_time(event)
+      else
+        logger.info "JSC: event was nil!"
       end
     end
     # Will get nil back if either arg is nil
@@ -31,10 +36,13 @@ class Line < ActiveRecord::Base
 
     def update_event_response_time(event)
       if (!event.nil? &&
-          !event.response_time.nil? &&
           !self.arrived_on_scene.nil?)
         response_time_seconds = self.arrived_on_scene - self.call_received
-        event.response_time = [event.response_time, response_time_seconds].min
+        if (event.response_time.nil?)
+          event.response_time = response_time_seconds
+        else
+          event.response_time = [event.response_time, response_time_seconds].min
+        end
         event.save!
       end
     end
