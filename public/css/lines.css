@@ -1,0 +1,52 @@
+#map_div {
+  width: 600px;
+  height: 350px;
+  border: 1px solid black;
+}
+
+#lines_div {
+  width: 600px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.lines_table {
+  font-size: 11px;
+  width: 600px;
+}
+
+thead {
+  background-color: #444;
+  color: #fff;
+}
+
+.line_1 {
+  background-color: #fff;
+}
+
+.line_2 {
+  background-color: #ddd;
+}
+
+.line_type {
+  text-align: center;
+  width: 30px;
+}
+
+.datetime {
+  text-align: center;
+  width: 50px;
+}
+
+.units {
+  text-align: center;
+  width: 130px;
+}
+
+.line_link {
+  text-align: center;
+  width: 15px;
+}
+
+.details {
+}
