@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
       @key = LocationsHelper.createKey(self.address, self.tax_map)
       @location = Location.find_by_key(@key)
       self.tax_map ||= "000"
+      self.tax_map.gsub!(/[^\d].*/,"")
       if (@location.nil?)
         @tax_map = TaxMap.find_by_tax_map_number(self.tax_map)
         @location = Location.create(:key => @key, :tax_map => @tax_map, :dirty_address => self.address)
