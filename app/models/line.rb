@@ -17,6 +17,10 @@ class Line < ActiveRecord::Base
     else
       # This is the only reason for an update, at this point
       line.arrived_on_scene = options[:arrived_on_scene]
+      event = Event.find_by_id(line.event_id)
+      if (!event.nil?) 
+      	line.update_event_response_time(event)
+      end
     end
     # Will get nil back if either arg is nil
     line.arrived_on_scene = add_date_to_time(line.line_date, line.arrived_on_scene)
@@ -24,6 +28,16 @@ class Line < ActiveRecord::Base
     line.save!
     line
   end
+
+    def update_event_response_time(event)
+      if (!event.nil? &&
+          !event.response_time.nil? &&
+          !self.arrived_on_scene.nil?)
+        response_time_seconds = self.arrived_on_scene - self.call_received
+        event.response_time = [event.response_time, response_time_seconds].min
+        event.save!
+      end
+    end
 
   private
 
@@ -44,6 +58,7 @@ class Line < ActiveRecord::Base
         nil
       end
     end
+
 
     def process_event
 
@@ -66,14 +81,7 @@ class Line < ActiveRecord::Base
             :response_time => response_time_seconds
           )
       else
-        if ! self.arrived_on_scene.nil?
-          response_time_seconds = self.arrived_on_scene - @event.event_datetime
-          if @event.response_time.nil? ||
-             @event.response_time > response_time_seconds
-            @event.response_time = response_time_seconds
-            @event.save
-          end
-        end
+        self.update_event_response_time(@event)
       end
       self.event_id = @event.id
     end
