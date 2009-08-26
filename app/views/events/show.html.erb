@@ -1,3 +1,9 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/css/lines.css"/>
+</head>
+<title></title>
+<body align="center">
 <% if (@event.nil?) %>
   <p>Could not retrieve event.</p>
 <% else %>
@@ -18,7 +24,9 @@
         <th>Details</th>
         <th>Unit</th>
       </thead>
-      <%= render :partial => "line", :collection => @lines %>
+      <%= render :partial => "lines/line", :collection => @event.lines %>
     </table>
   </div>
 <% end %>
+</body>
+</html>
