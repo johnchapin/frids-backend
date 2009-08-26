@@ -1,6 +1,18 @@
 class EventsController < ApplicationController
 
   def index
+
+    #
+    # SELECT id, place_name,
+    # ROUND(
+    #   SQRT(
+    #     POW((69.1 * (#Val(arguments.latitude)# - latitude)), 2) +
+    #     POW((53 * (#Val(arguments.longitude)# - longitude)), 2)
+    #   ), 1) AS distance
+    # FROM places
+    # ORDER BY distance ASC
+    #
+
     @events = Event.paginate(
       :page => params[:page],
       :include => [ :lines, :location ],
