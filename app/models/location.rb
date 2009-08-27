@@ -24,6 +24,11 @@ class Location < ActiveRecord::Base
   end
 
   def geocode
+
+    if self.tax_map.nil?
+      self.tax_map = TaxMap.find_by_tax_map_number("000")
+    end
+
     self.clean_address =
       LocationsHelper.cleanAddress(self.dirty_address) +
       (self.tax_map.city ? ", #{self.tax_map.city}" : "") +
