@@ -1,21 +1,13 @@
 class FridsParser
 
-  attr_accessor :line_type, :data_url
-
-  def initialize(line_type, data_url)
-    @line_type = line_type
-    @data_url = data_url
-    @logger = Logger.new(STDOUT)
-  end
-
-  def parse_data
+  def self.parse_data
     # Must be overridden
   end
 
-  def process (skip_update = false)
-    @result = self.parse_data
+  def self.process (url = nil, skip_update = false)
+    @result = self.parse_data(url)
     @result.to_hash.each { |single_hash|
-      single_hash["line_type"] = @line_type
+      single_hash["line_type"] = self.line_type
 #      @logger.info "Inserting or updating line: #{single_hash.to_s}"
       begin
         @line = Line.create_or_update(skip_update, single_hash)

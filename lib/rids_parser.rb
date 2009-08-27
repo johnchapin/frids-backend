@@ -3,13 +3,14 @@
 require 'scrubyt'
 
 class RidsParser < FridsParser
-  def parse_data
-    # Seems liks a hack, using a global var to
-    # get this value into the Extractor.define
-    # block
-    @@rids_data_url = @data_url
+
+  def self.line_type
+    "rids"
+  end
+
+  def self.parse_data (data_url)
     result = Scrubyt::Extractor.define do
-      fetch @@rids_data_url
+      fetch data_url
       record "/html/body/center/table/tr/td/table/tr" do
 		    line_date "/td[1]/font"
 		    incident_number "/td[2]/font"

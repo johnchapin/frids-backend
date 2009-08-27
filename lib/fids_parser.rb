@@ -4,10 +4,14 @@ require 'rubygems'
 require 'scrubyt'
 
 class FidsParser < FridsParser
-  def parse_data
-    @@fids_data_url = @data_url
+
+  def self.line_type
+    "fids"
+  end
+
+  def self.parse_data (data_url)
     Scrubyt::Extractor.define do
-	    fetch @@fids_data_url
+	    fetch data_url
       record "/html/body/center/table/tr/td/table/tr" do
 	  	  line_date "/td[1]/font"
 		    incident_number "/td[2]/font"
