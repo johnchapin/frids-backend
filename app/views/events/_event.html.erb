@@ -16,7 +16,7 @@
   </td>
   <td class="details">
     <%= event.lines.collect{|line|line.call_type+"..."}.uniq.join(", ") %><br/>
-    <%= event.location.clean_address.titleize %>
+    <%= event.location.clean_address.nil? ? "" : event.location.clean_address.titleize %>
   </td>
   <td class="units">
     <%= event.lines.collect{|line|line.unit}.uniq.join(", ") %>
