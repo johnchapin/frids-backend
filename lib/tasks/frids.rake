@@ -37,4 +37,13 @@ namespace :frids do
     print "Google Maps API response code: #{result} : #{GeocodeUtils::STATUS_MESSAGES[result]}\n"
   end
 
+  task (:test_tweet => :environment) do
+
+    tweet = Tweet.new("MURDER MOST FOUL","RUE MONTAGUE","123456")
+    tweet.perform
+    tweet = Tweet.new("WHITE SHOES AFTER LABOR DAY","CHERRY AVE","987654")
+    tweet.perform
+  
+  end
+
 end
