@@ -11,7 +11,7 @@
 </tr>
 <tr>
   <th>Address:</th>
-  <td><%= event_marker.location.clean_address.titleize %><br/>(<%= event_marker.location.status %>)</td>
+  <td><%= event_marker.location.clean_address.nil? ? "" : event_marker.location.clean_address.titleize %><br/>(<%= event_marker.location.status %>)</td>
 </tr>
 <tr>
   <th>Call Type:</th>
