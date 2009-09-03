@@ -35,4 +35,28 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+
+  def get_line_args (args = {})
+    line_options = {
+      :line_type => "rids",
+      :line_date => "08/21/2009",
+      :incident_number => "10084",
+      :unit => "141",
+      :address => "804 PAGE ST",
+      :tax_map => "077",
+      :call_type => "OVERDOSE AWAK AND T",
+      :call_received => "05:21:38",
+      :call_dispatch => "05:21:56",
+      :unit_enroute => "05:23:41",
+      :arrived_on_scene => "05:27:32",
+      :in_service => "05:39:44",
+      :url => "calldisp.php?full_incidentno=MRS090821010084&unitno=141"
+    }
+    args.each_pair {|k,v|
+      line_options[k] = v
+    }
+    line_options
+  end
+
 end
