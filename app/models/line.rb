@@ -1,97 +1,77 @@
 class Line < ActiveRecord::Base
-  before_create :process_event
   has_one :event
 
-  def self.create (options={})
-    self.create_or_update(true,options)
-  end
+  def Line.create_or_update(args)
+    skip_update = args.delete(:skip_update) || false
+    line_args = args.delete(:line_args)
 
-  def self.create_or_update (skip_update = false, options={})
     line = skip_update ? nil : Line.first(:conditions => {
-                                  :line_date => Date.parse(options[:line_date]),
-                                  :incident_number => options[:incident_number],
-                                  :unit => options[:unit]})
+                                :line_date => Date.parse(line_args[:line_date]),
+                                :incident_number => line_args[:incident_number],
+                                :unit => line_args[:unit]})
+
     if line.nil?
-      options.delete(:arrived_on_scene)
-      line = Line.new(options)
-      line.call_received = add_date_to_time(line.line_date, line.call_received)
-    else
-      # This is the only reason for an update, at this point
-      line.arrived_on_scene = options[:arrived_on_scene]
-      logger.info "JSC: Attempting to update event response time!"
-      event = Event.find_by_id(line.event_id)
-      if (!event.nil?) 
-        logger.info "JSC: event id = #{event.id}"
-      	line.update_event_response_time(event)
-      else
-        logger.info "JSC: event was nil!"
-      end
+      line = Line.new(line_args)
     end
-    # Will get nil back if either arg is nil
-    line.arrived_on_scene = add_date_to_time(line.line_date, line.arrived_on_scene)
-    line.arrived_on_scene = fix_time_after_received(line.call_received,line.arrived_on_scene)
-    line.save!
+
+    line.fix_call_received_time
+    line.fix_arrived_on_scene_time
+    line.process_event
+    line.save
     line
   end
 
-    def update_event_response_time(event)
-      if (!event.nil? &&
-          !self.arrived_on_scene.nil?)
-        response_time_seconds = self.arrived_on_scene - self.call_received
-        if (event.response_time.nil?)
-          event.response_time = response_time_seconds
-        else
-          event.response_time = [event.response_time, response_time_seconds].min
-        end
-        event.save!
-      end
+  def fix_call_received_time
+    if !self.call_received.nil? &&
+       !self.line_date.nil?
+      self.call_received = Time.local(self.line_date.year, self.line_date.month, self.line_date.day, self.call_received.hour, self.call_received.min, self.call_received.sec)
     end
+  end
 
-  private
-
-    def self.fix_time_after_received(received_time, fix_time)
-      if !received_time.nil? && !fix_time.nil?
-        0.upto(10) do
-          break if fix_time > received_time
-          fix_time += 1.day
-        end
-      end
-      fix_time
+  def fix_arrived_on_scene_time
+    if !self.arrived_on_scene.nil? &&
+       !self.call_received.nil?
+      self.arrived_on_scene = Time.local(self.line_date.year, self.line_date.month, self.line_date.day, self.arrived_on_scene.hour, self.arrived_on_scene.min, self.arrived_on_scene.sec)
+      0.upto(10) do
+        break if self.arrived_on_scene > self.call_received
+          self.arrived_on_scene += 1.day
+      end  
     end
+  end
 
-    def self.add_date_to_time (in_date, in_time)
-      if !in_date.nil? && !in_time.nil?
-        Time.local(in_date.year, in_date.month, in_date.day, in_time.hour, in_time.min, in_time.sec)
-      else
-        nil
-      end
+  def get_response_time
+    if !self.arrived_on_scene.nil? &&
+       !self.call_received.nil?
+      self.arrived_on_scene - self.call_received
     end
+  end
 
-
-    def process_event
-
-      @window_begin = self.call_received - 15.minutes
-      @window_end = self.call_received + 15.minutes
-
-      @event = Event.find(:first,
-        :conditions => { :event_datetime => @window_begin..@window_end,
+  def process_event
+    window_begin = self.call_received - 15.minutes
+    window_end = self.call_received + 15.minutes
+    response_time = get_response_time
+    
+    event = Event.find(:first,
+                       :conditions => {
+                         :event_datetime => window_begin..window_end,
                          :address => self.address })
 
-      response_time_seconds = nil
-      if (@event.nil?)
-        if ! self.arrived_on_scene.nil?
-          response_time_seconds = self.arrived_on_scene - self.call_received
-        end
-        @event = Event.create(
-            :event_datetime => self.call_received,
-            :address => self.address,
-            :tax_map => self.tax_map,
-            :response_time => response_time_seconds
-          )
-      else
-        self.update_event_response_time(@event)
+    if event.nil?
+      event = Event.create(
+                :event_datetime => self.call_received,
+                :address => self.address,
+                :tax_map => self.tax_map,
+                :response_time => response_time )
+      if event.event_datetime > Time.new - 1.hour
+        Delayed::Job.enqueue(Tweet.new(self.call_type, event.address, event.id))
       end
-      self.event_id = @event.id
+    else
+      event.response_time = event.response_time.nil? ? response_time :
+                            response_time.nil? ? nil :
+                            [event.response_time, response_time].min
+      event.save
     end
+    self.event_id = event.id
+  end
 
 end
