@@ -10,7 +10,8 @@ class FridsParser
       single_hash["line_type"] = self.line_type
 #      @logger.info "Inserting or updating line: #{single_hash.to_s}"
       begin
-        @line = Line.create_or_update(skip_update, single_hash)
+        @line = Line.create_or_update(:skip_update => skip_update, 
+                                      :line_args => single_hash)
       rescue ActiveRecord::StatementInvalid
         # This gets thrown on dupe inserts
         @logger.error "Error inserting or updating line: #{single_hash.to_s}"
