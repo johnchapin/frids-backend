@@ -1,6 +1,11 @@
 class Location < ActiveRecord::Base
 
+  # See Tax Map fixture in db/migrations/data for these values as well
   CHARLOTTESVILLE_LATLON = [38.037764,-78.48926]
+  LAT_MIN = 37.7087977269939
+  LAT_MAX = 38.2913778253595
+  LON_MIN = -78.874703236331
+  LON_MAX = -78.2077234317986
   THROTTLE_THRESHOLD = 256
   INITIAL_DELAY = 2
   DELAY_STEP = 2
