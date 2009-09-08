@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  helper_method :render_to_string
 
   def index
 
@@ -16,7 +17,7 @@ class EventsController < ApplicationController
     #
     # Instead, we're just doing a box, defined by four values
 
-    draw_limits = [:lat_min,:lat_max,:lon_min,:lon_max].any? {|p| params.key? (p)}
+    draw_limits = [:lat_min,:lat_max,:lon_min,:lon_max].any? {|p| params.key?(p)}
 
     # The ActiveRecord range ".." doesn't care if you give it String or
     # Float, but don't mix the two...
@@ -42,6 +43,13 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.xml { render :xml => (@events.to_xml :include => [:lines, :location]) }
       format.json { render :json => (@events.to_json :include => [:lines, :location]) }
+      format.js {
+        render :update do |page|
+          page.replace_html 'events_div', :partial => 'events_list'
+          @map = Variable.new("map")
+        end
+      }
+
       format.html {
 
         @map = GMap.new("map_div")
@@ -74,6 +82,7 @@ class EventsController < ApplicationController
         else
           @map.center_zoom_init([lat_center,lon_center],10)
         end
+        
         @events.each do |event|
           marker_content = render_to_string :partial => "event_marker",
                                             :object => event
