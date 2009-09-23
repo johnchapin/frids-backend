@@ -3,6 +3,15 @@ class EventsController < ApplicationController
 
   def index
 
+   logger.info("JSC: #{params[:time_min]}")
+   logger.info("JSC: #{params[:time_max]}")
+
+    @time_min = Time.parse(params[:time_min] || (Time.new - 1.week).to_s)
+    @time_max = Time.parse(params[:time_max] || Time.new.to_s)
+
+   logger.info("JSC: #{@time_min}")
+   logger.info("JSC: #{@time_max}")
+
     # The following SQL pseudo-code is for a point and a circular range
     # around that point.  This is nice, but very slow.
     #
@@ -35,7 +44,8 @@ class EventsController < ApplicationController
       :include => [ :lines, :location ],
       :conditions => { "locations.status" => ["VALID","APPROXIMATE"],
                        "locations.latitude" => lat_min..lat_max,
-                       "locations.longitude" => lon_min..lon_max},
+                       "locations.longitude" => lon_min..lon_max,
+                       "lines.call_received" => @time_min.getutc..@time_max.getutc},
       :order => "event_datetime DESC",
       :per_page => 10
     )
@@ -53,6 +63,8 @@ class EventsController < ApplicationController
       format.html {
 
         @map = GMap.new("map_div")
+        @map.record_init("map.addControl(dragZoom = new DragZoomControl(), new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(7,7)));")
+                  
         @map.control_init(:large_map => true, :map_type => true)
         @map.icon_global_init(GIcon.new(:copy_base => GIcon::DEFAULT,
                                :icon_size => GSize.new(32,32),

@@ -1,21 +1,8 @@
   <%= will_paginate @events %> 
   <script>
   <% map = Variable.new("map") %>
-  <% green_icon = Variable.new("green_icon") %>
-  <% blue_icon = Variable.new("blue_icon") %>
+  map.enableKeyDragZoom()
   <%= map.clear_overlays.to_javascript %>
-  <% @events.each  { |event| %>
-  <% marker_content = render_to_string :partial => "event_marker",
-                                       :object => event %>
-  <%= map.add_overlay(
-        GMarker.new(
-          [event.location.latitude,event.location.longitude],
-          :info_window => marker_content,
-          :title => event.lines[0].call_type,
-          :icon => (event.location.status == "VALID" ? green_icon : blue_icon)
-        )
-      ).to_javascript %>
-  <% } %>
   </script>
   <table class="events_table"> 
     <thead class="events_header"> 

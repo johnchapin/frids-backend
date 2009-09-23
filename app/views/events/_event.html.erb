@@ -1,4 +1,19 @@
 <% event_class = "event_" + (event_counter.modulo(2).nonzero? ? "1" : "2") %>
+  <script>
+  <% map = Variable.new("map") %>
+  <% green_icon = Variable.new("green_icon") %>
+  <% blue_icon = Variable.new("blue_icon") %>
+  <% marker_content = render_to_string :partial => "event_marker",
+                                       :object => event %>
+  <%= map.add_overlay(
+        GMarker.new(
+          [event.location.latitude,event.location.longitude],
+          :info_window => marker_content,
+          :title => event.lines[0].call_type,
+          :icon => (event.location.status == "VALID" ? green_icon : blue_icon)
+        )
+      ).to_javascript %>
+  </script>
 
 <tr class="<%= event_class %>">
   <td class="event_link">

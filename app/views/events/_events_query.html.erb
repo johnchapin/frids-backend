@@ -1,0 +1,17 @@
+<% form_for :event, :url => {:action => :index},
+            :html => {:id => :event_query_form} do |f| %>
+  From: <%= calendar_date_select_tag :time_min,
+          @time_min.strftime("%Y-%m-%d %H:%M"),
+          :time => true,
+          :valid_date_check => "date <= (new Date()).stripTime()" %>
+  To: <%= calendar_date_select_tag :time_max,
+          @time_max.strftime("%Y-%m-%d %H:%M"),
+          :time => true,
+          :valid_date_check => "date <= (new Date()).stripTime()" %>
+<% end %>
+<%= observe_form(:event_query_form,
+  :url => {:action => :index},
+  :method => :get,
+  :frequency => 1.0)
+  %>
+

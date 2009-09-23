@@ -51,10 +51,11 @@ class Line < ActiveRecord::Base
     window_end = self.call_received + 15.minutes
     response_time = get_response_time
     
-    event = Event.find(:first,
-                       :conditions => {
+    event = self.event_id.nil? ? Event.find(:first,
+                         :conditions => {
                          :event_datetime => window_begin..window_end,
-                         :address => self.address })
+                         :address => self.address }) : Event.find(self.event_id)
+                        
 
     if event.nil?
       event = Event.create(
@@ -66,10 +67,14 @@ class Line < ActiveRecord::Base
         Delayed::Job.enqueue(Tweet.new(self.call_type, event.address, event.id))
       end
     else
-      event.response_time = event.response_time.nil? ? response_time :
-                            response_time.nil? ? nil :
-                            [event.response_time, response_time].min
-      event.save
+      if !response_time.nil?
+        if !event.response_time.nil?
+          event.response_time = [event.response_time, response_time].min
+        else
+          event.response_time = response_time
+        end
+        event.save
+      end
     end
     self.event_id = event.id
   end
