@@ -8,7 +8,7 @@ class FridsParser
     @result = self.parse_data(url)
     @result.to_hash.each { |single_hash|
       single_hash["line_type"] = self.line_type
-#      @logger.info "Inserting or updating line: #{single_hash.to_s}"
+      # @logger.info "Inserting or updating line: #{single_hash.to_s}"
       begin
         @line = Line.create_or_update(:skip_update => skip_update, 
                                       :line_args => single_hash)
