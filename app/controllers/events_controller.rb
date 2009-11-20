@@ -3,14 +3,8 @@ class EventsController < ApplicationController
 
   def index
 
-   logger.info("JSC: #{params[:time_min]}")
-   logger.info("JSC: #{params[:time_max]}")
-
     @time_min = Time.parse(params[:time_min] || (Time.new - 1.week).to_s)
     @time_max = Time.parse(params[:time_max] || Time.new.to_s)
-
-   logger.info("JSC: #{@time_min}")
-   logger.info("JSC: #{@time_max}")
 
     # The following SQL pseudo-code is for a point and a circular range
     # around that point.  This is nice, but very slow.
