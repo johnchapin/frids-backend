@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'daemons'
   config.gem 'calendar_date_select'
   config.gem 'mash', :version => '0.0.3'
+  config.gem 'httparty', :version => '0.4.3'
   config.gem 'twitter'
   config.gem 'oauth'
   config.gem 'hpricot'
