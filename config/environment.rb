@@ -26,6 +26,8 @@ Rails::Initializer.run do |config|
   config.gem 'daemons'
   config.gem 'calendar_date_select'
   config.gem 'twitter'
+  config.gem 'hpricot'
+  config.gem 'scrubyt'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
