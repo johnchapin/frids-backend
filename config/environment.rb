@@ -6,8 +6,8 @@ RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require 'find'
-require 'twitter'
 require 'open-uri'
+# require 'twitter'
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
   config.gem 'daemons'
   config.gem 'calendar_date_select'
+  config.gem 'twitter'
 
 
   # Only load the plugins named here, in the order given (default is alphabetical).
