@@ -14,6 +14,10 @@ class Line < ActiveRecord::Base
       line = Line.new(line_args)
     end
 
+    if (line.arrived_on_scene.nil?)
+       line.arrived_on_scene = line_args[:arrived_on_scene]
+    end
+
     line.fix_call_received_time
     line.fix_arrived_on_scene_time
     line.process_event
