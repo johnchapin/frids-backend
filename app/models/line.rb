@@ -68,7 +68,9 @@ class Line < ActiveRecord::Base
                 :tax_map => self.tax_map,
                 :response_time => response_time )
       if event.event_datetime > Time.new - 1.hour
-        Delayed::Job.enqueue(Tweet.new(self.call_type, event.address, event.id))
+        ### Delayed::Job.enqueue(Tweet.new(self.call_type, event.address, event.id))
+        tweet = Tweet.new(self.call_type, event.address, event.id)
+	tweet.perform
       end
     else
       if !response_time.nil?
