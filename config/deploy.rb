@@ -27,6 +27,11 @@ namespace :delayed_job do
   end
 end
 
+task :after_update_code do
+  desc "Rebuild native components for gems"
+  run "rake -f #{release_path}/Rakefile gems:build"
+end
+
 namespace :deploy do
   %w(start restart).each { |name| task name, :roles => :app do passenger.restart end }
 end
