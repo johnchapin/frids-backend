@@ -33,6 +33,8 @@ class EventsController < ApplicationController
     lat_center = (lat_min+lat_max)/2.0
     lon_center = (lon_min+lon_max)/2.0
 
+    per_page = params[:per_page] || 10;
+
     @events = Event.paginate(
       :page => params[:page],
       :include => [ :lines, :location ],
@@ -41,7 +43,7 @@ class EventsController < ApplicationController
                        "locations.longitude" => lon_min..lon_max,
                        "lines.call_received" => @time_min.getutc..@time_max.getutc},
       :order => "event_datetime DESC",
-      :per_page => 10
+      :per_page => per_page
     )
 
     respond_to do |format|
