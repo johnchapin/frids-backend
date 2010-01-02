@@ -36,7 +36,7 @@ class EventsController < ApplicationController
     # the unmarshalling will bomb with "undefined class" errors
     Event
     Line
-    @events = Rails.cache.fetch(params.to_s, :expires_in => 2.minutes) {
+    @events = Rails.cache.fetch(params.to_s.gsub(/[^A-Za-z0-9]+/,''), :expires_in => 2.minutes) {
       Event.paginate(
         :page => params[:page],
         :include => [ :lines, :location ],
