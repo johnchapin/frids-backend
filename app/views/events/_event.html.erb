@@ -1,10 +1,14 @@
 <% event_class = "event_" + (event_counter.modulo(2).nonzero? ? "1" : "2") %>
   <script>
-  <% map = Variable.new("map") %>
-  <% green_icon = Variable.new("green_icon") %>
-  <% blue_icon = Variable.new("blue_icon") %>
+  <% map = Variable.new("map") -%>
+  <% green_icon = Variable.new("green_icon") -%>
+  <% blue_icon = Variable.new("blue_icon") -%>
   <% marker_content = render_to_string :partial => "event_marker",
-                                       :object => event %>
+                                       :object => event -%>
+
+
+        add_overlay = function() {
+  
   <%= map.add_overlay(
         GMarker.new(
           [event.location.latitude,event.location.longitude],
@@ -13,6 +17,15 @@
           :icon => (event.location.status == "VALID" ? green_icon : blue_icon)
         )
       ).to_javascript %>
+
+        };
+
+	if (map) {
+		add_overlay();
+	} else {
+        	window.onload = addCodeToFunction(window.onload, add_overlay);
+	}
+
   </script>
 
 <tr class="<%= event_class %>">

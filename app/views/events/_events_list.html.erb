@@ -1,6 +1,6 @@
-  <%= will_paginate @events %> 
+  <%= will_paginate @events -%> 
   <script>
-  <% map = Variable.new("map") %>
+  <% map = Variable.new("map") -%>
   // map.enableKeyDragZoom()
   <%= map.clear_overlays.to_javascript %>
   </script>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090904210911) do
+ActiveRecord::Schema.define(:version => 20091121143703) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20090904210911) do
     t.datetime "updated_at"
   end
 
+  add_index "lines", ["call_received"], :name => "index_lines_on_call_received"
   add_index "lines", ["event_id"], :name => "index_lines_on_event_id"
   add_index "lines", ["line_date", "incident_number", "unit"], :name => "index_lines_on_line_date_and_incident_number_and_unit", :unique => true
 
